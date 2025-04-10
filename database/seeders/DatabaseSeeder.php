@@ -11,6 +11,8 @@ class DatabaseSeeder extends Seeder
         $this->call([
             TypeObjetSeeder::class,
             ZoneSeeder::class,
+            UserSeeder::class
+
         ]);
     }
 }

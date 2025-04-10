@@ -17,8 +17,8 @@ class AddLoginPoints
         $key = 'user_last_login_' . $user->id;
 
         
-            $user->points += 1;
-            $user->save();
+            $user->ajouterPoints(1);
+
 
            
         

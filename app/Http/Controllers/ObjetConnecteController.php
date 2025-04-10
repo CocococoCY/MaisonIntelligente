@@ -24,8 +24,8 @@ class ObjetConnecteController extends Controller
             // Ajoute les points ici
             if ($objet && Auth::check()) {
                 $user = Auth::user();
-                $user->points += 2;
-                $user->save();
+                Auth::user()->ajouterPoints(1);
+
             }
         }
 

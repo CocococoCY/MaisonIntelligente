@@ -10,6 +10,9 @@ class TypeObjetSeeder extends Seeder
 {
     public function run(): void
     {
+        DB::statement('PRAGMA foreign_keys = OFF;');
+        DB::table('types_objets')->truncate();
+
         DB::table('types_objets')->insert([
             ['id' => 1, 'nom' => 'Lampe', 'created_at' => now(), 'updated_at' => now()],
             ['id' => 2, 'nom' => 'Thermostat', 'created_at' => now(), 'updated_at' => now()],

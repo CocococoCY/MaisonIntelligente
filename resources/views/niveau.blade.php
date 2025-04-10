@@ -25,10 +25,11 @@
       @csrf
       <button class="btn btn-success">Demander le niveau : {{ $prochain }}</button>
     </form>
-  @elseif($prochain)
-    <p>Vous n'avez pas encore assez de points pour le prochain niveau.</p>
-  @else
-    <p>Vous avez atteint le niveau maximum !</p>
-  @endif
+    @elseif($prochain && $user->points < $pointsRequis[$prochain])
+     <p>Vous n'avez pas encore assez de points pour le prochain niveau.</p>
+    @elseif($user->niveau === 'Expert' || $user->points >= 15)
+     <p>Vous avez atteint le niveau maximum !</p>
+    @endif
+
 </div>
 @endsection

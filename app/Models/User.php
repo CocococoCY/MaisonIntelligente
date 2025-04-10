@@ -51,4 +51,18 @@ class User extends Authenticatable
     {
         return $this->hasMany(\App\Models\Piece::class);
     }
+    public function ajouterPoints($valeur)
+    {
+        if ($this->points >= 15) {
+            return; // Ne pas dépasser le plafond
+        }
+
+        $this->points += $valeur;
+        if ($this->points > 15) {
+            $this->points = 15;
+        }
+
+        $this->save();
+    }
+
 }
