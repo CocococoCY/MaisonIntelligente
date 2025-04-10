@@ -13,8 +13,6 @@ class DemandeSuppressionController extends Controller
     {
         $objet = ObjetConnecte::findOrFail($id);
 
-
-        // Vérifie si une demande existe déjà pour cet objet par ce user
         $existante = DemandeSuppression::where('objet_connecte_id', $id)
             ->where('user_id', Auth::id())
             ->first();
@@ -23,12 +21,10 @@ class DemandeSuppressionController extends Controller
             return redirect()->back()->with('error', 'Une demande de suppression a déjà été envoyée pour cet objet.');
         }
 
-        // Crée la demande
         DemandeSuppression::create([
             'objet_connecte_id' => $id,
             'user_id' => Auth::id()
         ]);
-        return response()->json(['user_id' => Auth::id()]);
 
         return redirect()->back()->with('success', 'Demande de suppression envoyée à l’administrateur.');
     }

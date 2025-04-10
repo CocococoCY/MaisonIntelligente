@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\ObjetConnecte;
 use App\Models\TypeObjet;
 use App\Models\Zone;
+use Illuminate\Support\Facades\Auth;
 
 class ObjetConnecteController extends Controller
 {
@@ -36,6 +37,13 @@ class ObjetConnecteController extends Controller
     public function index()
     {
         $objets = ObjetConnecte::with('typeObjet', 'zone')->get();
+
+        foreach ($objets as $objet) {
+            $objet->demandeExistante = $objet->demandeSuppression()
+                ->where('user_id', Auth::id())
+                ->exists();
+        }
+
         return view('objets.index', compact('objets'));
     }
 

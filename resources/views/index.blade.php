@@ -138,8 +138,18 @@
       <button onclick="resetFilters()">Supprimer les filtres</button>
     </div>
     <div class="header-right">
-      <a href="{{ route('inscription') }}" class="button">S'inscrire</a>
-<a href="{{ route('connexion') }}" class="button">Se connecter</a>
+      
+      @if(isset($depuisMaison) && $depuisMaison && Auth::check())
+        
+        <a href="{{ route('objets.index') }}" class="button">🏠 Mes Objets Connectés</a>
+         
+      @else
+        @guest
+          <a href="{{ route('inscription') }}" class="button">S'inscrire</a>
+          <a href="{{ route('connexion') }}" class="button">Se connecter</a>
+        @endguest
+      @endif
+
     </div>
   </header>
   
@@ -162,8 +172,8 @@
       </div>
       <!-- Article 3 -->
       <div class="product" data-price="59" data-category="eclairage">
-        <img src="https://via.placeholder.com/200" alt="Éclairage LED connecté">
-        <h3>Éclairage LED Connecté</h3>
+        <img src="https://via.placeholder.com/200" alt="Éclairages">
+        <h3>Éclairages</h3>
         <p>Ambiance personnalisée pour chaque pièce</p>
         <div class="price">€59</div>
       </div>
@@ -204,6 +214,7 @@
       </div>
     </div>
   </div>
+  
 
   <script>
     function applyFilters() {

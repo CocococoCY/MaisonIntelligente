@@ -10,6 +10,7 @@
     <!-- CSS directement intégré -->
     <style>
         /* Styles personnalisés directement dans la vue */
+        
         body {
             background-color: #e0e0e0 !important;
             color: #333 !important;
@@ -106,15 +107,11 @@
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                 <ul class="navbar-nav">
                     @auth
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('profil.edit') }}">👤 Modifier mon profil</a>
-                        </li>
+                        
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('menu') }}">🏠 Menu</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('users.index') }}">👥 Membres</a>
-                        </li>
+                        
                     @endauth
                     @guest
                         <li class="nav-item">

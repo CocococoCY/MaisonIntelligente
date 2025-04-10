@@ -39,5 +39,10 @@ class ObjetConnecte extends Model
     {
         return $this->belongsTo(\App\Models\Zone::class);
     }
+    public function demandeSuppression()
+    {
+        return $this->hasOne(\App\Models\DemandeSuppression::class, 'objet_connecte_id');
+    }
+
 
 }

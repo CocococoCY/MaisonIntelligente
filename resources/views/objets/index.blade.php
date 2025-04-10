@@ -54,7 +54,6 @@
         <a href="{{ route('objets.create') }}" class="btn btn-primary">➕ Ajouter un nouvel objet</a>
         <a href="{{ route('rapports.index') }}" class="btn btn-info">📊 Voir le rapport</a>
         <a href="{{ route('statistiques.index') }}" class="btn btn-secondary">📈 Voir les statistiques</a>
-        <a href="{{ route('objets.create') }}" class="btn btn-primary">➕ Ajouter un nouvel objet</a>
         <a href="{{ route('menu') }}" class="btn btn-success">🏠 Retour au menu principal</a>   
     </div>
 
@@ -123,14 +122,15 @@
                                                 ->exists();
                         @endphp
 
-                        @if (!$demandeExistante)
-                            <form method="POST" action="{{ route('demande.suppression', $objet->id) }}" style="display:inline;">
+                        @if (!$objet->demandeExistante)
+                            <form action="{{ route('demande.suppression', $objet->id) }}" method="POST" style="display:inline;">
                                 @csrf
-                                <button type="submit" class="btn btn-sm btn-danger btn-action">🗑️ Supprimer</button>
+                                <button type="submit" class="btn btn-danger">🗑 Supprimer</button>
                             </form>
                         @else
-                            <span class="badge bg-secondary btn-action">🕓 Demande envoyée</span>
+                            <span class="btn btn-secondary">📨 Demande envoyée</span>
                         @endif
+
                     </td>
                 </tr>
             @endforeach

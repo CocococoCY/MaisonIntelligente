@@ -65,10 +65,16 @@
 </head>
 <body>
 
+<a href="{{ route('menu') }}" class="btn btn-outline-primary float-end">
+    ⬅️ Retour au menu principal
+</a>
+
 <h1>Bienvenue dans l'espace Admin 👨‍💻</h1>
 
 <!-- 🔧 Bouton de configuration -->
 <a href="{{ route('admin.settings.edit') }}" class="btn-link">⚙️ Personnalisation de la plateforme</a>
+<a href="{{ route('admin.demandes.index') }}" class="btn-link">🗑️ Demandes de suppression</a>
+
 
 <!-- Section utilisateurs -->
 <div class="section">

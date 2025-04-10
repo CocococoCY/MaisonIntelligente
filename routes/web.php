@@ -13,6 +13,15 @@ use App\Http\Controllers\SettingController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProfilController;
 use Livewire\Volt\Volt;
+use App\Http\Controllers\Admin\DemandeSuppressionAdminController;
+
+Route::get('/boutique', function () {
+    return view('index', ['depuisMaison' => true]);
+})->name('boutique.connexion');
+
+Route::get('/menu', function () {
+    return view('menu');
+})->name('maison.menu');
 
 // Accueil
 Route::get('/', function () {
@@ -29,9 +38,16 @@ Route::post('/verification-code', [AuthController::class, 'verifyCode'])->name('
 Route::get('/menu', [AuthController::class, 'showMenu'])->name('menu')->middleware('auth');
 
 // Admin
+
+Route::prefix('admin')->middleware(['auth'])->group(function () {
+    Route::get('/demandes-suppression', [DemandeSuppressionAdminController::class, 'index'])->name('admin.demandes.index');
+    Route::post('/demandes-suppression/{id}/accepter', [DemandeSuppressionAdminController::class, 'accepter'])->name('admin.demandes.accepter');
+    Route::delete('/demandes-suppression/{id}/refuser', [DemandeSuppressionAdminController::class, 'refuser'])->name('admin.demandes.refuser');
+});
+
 Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/', function () {
-        if (auth()->check() && auth()->user()->email === 'julien.megnoux@me.com') {
+        if (auth()->check() && auth()->user()->email === 'arbriz.coco@gmail.com') {
             $users = App\Models\User::all();
             $logs = \App\Models\UserLog::latest()->take(50)->get();
             $categories = \App\Models\Category::all();
@@ -59,7 +75,9 @@ Route::get('/objets/{objet}/edit', [ObjetConnecteController::class, 'edit'])->na
 Route::put('/objets/{objet}', [ObjetConnecteController::class, 'update'])->name('objets.update');
 
 // Demande de suppression
+
 Route::post('/objets/{id}/demande-suppression', [DemandeSuppressionController::class, 'store'])->name('demande.suppression');
+
 
 // Statistiques et rapports
 Route::get('/statistiques', [StatistiqueController::class, 'index'])->name('statistiques.index');

@@ -55,13 +55,14 @@
       <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
         <ul class="navbar-nav">
           @auth
+           <li class="nav-item">
+              <a class="nav-link" href="{{ route('users.index') }}">👥 Membres</a>
+            </li>
             <li class="nav-item">
               <a class="nav-link" href="{{ route('profil.edit') }}">👤 Modifier mon profil</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{{ route('objets.index') }}">🏠 Objets</a>
-            </li>
-            @if(Auth::user()->email === 'julien.megnoux@me.com')
+            
+            @if(Auth::user()->email === 'arbriz.coco@gmail.com')
               <li class="nav-item">
                 <a class="nav-link" href="{{ route('admin.dashboard') }}">🔒 Espace Admin</a>
               </li>
@@ -89,6 +90,11 @@
     <div class="gestion-btn">
       <a href="{{ route('objets.index') }}">
         <button>Accéder aux Objets</button>
+      </a>
+    </div>
+    <div class="gestion-btn">
+      <a href="{{ route('boutique.connexion') }}">
+        <button>🛍️ Accéder à la Boutique</button>
       </a>
     </div>
 
