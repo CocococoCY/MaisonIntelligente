@@ -199,18 +199,32 @@
         <div class="price">€89</div>
       </div>
       <!-- Article 7 -->
-      <div class="product" data-price="79" data-category="securite">
-        <img src="https://via.placeholder.com/200" alt="Détecteur de Fumée Connecté">
-        <h3>Détecteur de Fumée Connecté</h3>
-        <p>Alerte instantanée en cas de fumée ou incendie</p>
-        <div class="price">€79</div>
-      </div>
-      <!-- Article 8 -->
       <div class="product" data-price="99" data-category="interphone">
         <img src="https://via.placeholder.com/200" alt="Interphone Connecté">
         <h3>Interphone Connecté</h3>
-        <p>Communication facile avec vos visiteurs via smartphone</p>
+        <p>Communication facile avec vos visiteurs</p>
         <div class="price">€99</div>
+      </div>
+      <!-- Article 8 -->
+      <div class="product" data-price="299" data-category="interphone">
+        <img src="https://via.placeholder.com/200" alt="Portail">
+        <h3>Portail Automatique</h3>
+        <p>Facilité pour gérer l'accès à votre domicile</p>
+        <div class="price">500</div>
+      </div>
+      <!-- Article 9 -->
+      <div class="product" data-price="299" data-category="interphone">
+        <img src="https://via.placeholder.com/200" alt="Volets">
+        <h3>Volets automatiques</h3>
+        <p>Préparation pour votre nuit ajustée</p>
+        <div class="price">€230</div>
+      </div>
+      <!-- Article 10 -->
+      <div class="product" data-price="149" data-category="interphone">
+        <img src="https://via.placeholder.com/200" alt="Alarme connectée">
+        <h3>Alarme Connectée</h3>
+        <p>Partez de chez vous avec tranquilité</p>
+        <div class="price">€149</div>
       </div>
     </div>
   </div>
