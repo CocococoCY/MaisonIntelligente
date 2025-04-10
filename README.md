@@ -62,8 +62,9 @@ Accéder à l’application ici : [http://127.0.0.1:8000](http://127.0.0.1:8000)
 
 Le projet est configuré pour fonctionner avec un compte Gmail de test :
 
-- Vérifie le fichier `.env.github` pour les identifiants.
-- Tu peux générer un mot de passe d’application ici : [https://myaccount.google.com/apppasswords](https://myaccount.google.com/apppasswords)
+---
+
+⚠️Quand on veut visualiser la partie Admin, il faut créer un compte avec l'adresse mail arbriz.coco@gmail.com qui est la seule accédant à ce module du projet.⚠️
 
 ---
 
@@ -79,11 +80,13 @@ Le projet est configuré pour fonctionner avec un compte Gmail de test :
 ├── routes/
 ├── .env.github ✅
 ├── README.md ✅
+
 ```
 
 > ⚠️ Les fichiers sensibles comme `.env`, `vendor/`, `node_modules/` sont ignorés par Git.
 
 ---
+
 
 ## 👨‍💻 Contributeurs
 
