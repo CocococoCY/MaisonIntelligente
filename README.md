@@ -26,7 +26,7 @@ npm install && npm run dev
 Copier le fichier `.env` de configuration fourni :
 
 ```bash
-cp .env.github .env
+copy .env.github .env
 ```
 
 Puis générer la clé de l'application :
@@ -37,10 +37,10 @@ php artisan key:generate
 
 ### 4. Créer la base de données (SQLite)
 
-Assure-toi que le fichier suivant existe :
-
 ```bash
-touch database/database.sqlite
+type nul > database\database.sqlite
+
+php artisan migrate
 ```
 
 Laravel utilisera automatiquement la base SQLite fournie.
