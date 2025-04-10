@@ -41,6 +41,9 @@ php artisan key:generate
 type nul > database\database.sqlite
 
 php artisan migrate
+
+php artisan db:seed
+
 ```
 
 Laravel utilisera automatiquement la base SQLite fournie.
