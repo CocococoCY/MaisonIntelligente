@@ -54,29 +54,42 @@
       </button>
       <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
         <ul class="navbar-nav">
-          @auth
-           <li class="nav-item">
-              <a class="nav-link" href="{{ route('users.index') }}">👥 Membres</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{{ route('profil.edit') }}">👤 Modifier mon profil</a>
-            </li>
-            <li>
-              <a class="nav-link" href="{{ route('niveau.index') }}">📊 Mon niveau & points</a>
-            </li>
+        @auth
+          {{-- Accessible à tous les niveaux --}}
+          <li class="nav-item">
+            <a class="nav-link" href="{{ route('objets.recherche') }}">🔍 Rechercher</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ route('profil.edit') }}">👤 Modifier mon profil</a>
+          </li>
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="{{ route('users.index') }}">👥 Voir les membres</a>
+          </li>
 
-            @if(Auth::user()->email === 'corent1.lebris@gmail.com')
-              <li class="nav-item">
-                <a class="nav-link" href="{{ route('admin.dashboard') }}">🔒 Espace Admin</a>
-              </li>
-            @endif
+          {{-- Avancé ou plus --}}
+          @if(in_array(Auth::user()->niveau, ['Avancé', 'Expert']))
             <li class="nav-item">
-              <form method="POST" action="{{ route('logout') }}">
-                @csrf
-                <button type="submit" class="nav-link btn btn-link text-light">🚪 Déconnexion</button>
-              </form>
+              <a class="nav-link" href="{{ route('objets.index') }}">⚙️ Gestion Objets</a>
             </li>
-          @endauth
+          @endif
+
+          {{-- Expert uniquement --}}
+          @if(Auth::user()->niveau === 'Expert')
+            <li class="nav-item">
+              <a class="nav-link" href="{{ route('admin.dashboard') }}">🛡️ Espace Admin</a>
+            </li>
+          @endif
+
+          <li class="nav-item">
+            <form method="POST" action="{{ route('logout') }}">
+              @csrf
+              <button type="submit" class="nav-link btn btn-link text-light">🚪 Déconnexion</button>
+            </form>
+          </li>
+        @endauth
+
           
           
 
@@ -93,14 +106,11 @@
   <div class="container">
     <h1>Bienvenue dans votre maison connectée</h1>
     
+    
+    
     <div class="gestion-btn">
-      <a href="{{ route('objets.recherche') }}">
-        <button>🔍 Rechercher un objet</button>
-      </a>
-    </div>
-    <div class="gestion-btn">
-      <a href="{{ route('objets.index') }}">
-        <button>Accéder aux Objets</button>
+      <a href="{{ route('niveau.index') }}">
+        <button>📈 Mon niveau</button>
       </a>
     </div>
     <div class="gestion-btn">

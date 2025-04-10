@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class DemandeSuppression extends Model
 {
     use HasFactory;
+
+    
     
     protected $table = 'demande_suppression'; // ← force Laravel à utiliser le bon nom
 

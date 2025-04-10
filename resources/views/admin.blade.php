@@ -74,6 +74,7 @@
 <!-- 🔧 Bouton de configuration -->
 <a href="{{ route('admin.settings.edit') }}" class="btn-link">⚙️ Personnalisation de la plateforme</a>
 <a href="{{ route('admin.demandes.index') }}" class="btn-link">🗑️ Demandes de suppression</a>
+<a href="{{ route('admin.niveaux') }}" class="btn-link">👤 Niveaux utilisateurs</a>
 
 
 <!-- Section utilisateurs -->

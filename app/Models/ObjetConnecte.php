@@ -9,6 +9,9 @@ class ObjetConnecte extends Model
 {
     use HasFactory;
 
+
+    protected $table = 'objet_connectes';
+    
     protected $fillable = [
         'type_objet_id',
         'batterie',

@@ -14,7 +14,11 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProfilController;
 use Livewire\Volt\Volt;
 use App\Http\Controllers\Admin\DemandeSuppressionAdminController;
+use App\Http\Controllers\AdminController;
 
+Route::get('/admin/niveaux', [AdminController::class, 'voirDemandes'])->name('admin.niveaux');
+Route::post('/admin/niveaux/{id}/accepter', [AdminController::class, 'accepterDemande'])->name('admin.niveau.accepter');
+Route::post('/admin/niveaux/{id}/refuser', [AdminController::class, 'refuserDemande'])->name('admin.niveau.refuser');
 
 Route::get('/boutique', function () {
     return view('index', ['depuisMaison' => true]);

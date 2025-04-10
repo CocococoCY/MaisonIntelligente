@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('demande_suppression', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('objet_connecte_id')->constrained('objets_connectes')->onDelete('cascade');
+            $table->foreignId('objet_connecte_id')->constrained('objet_connectes')->onDelete('cascade');
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->timestamps();
         });
