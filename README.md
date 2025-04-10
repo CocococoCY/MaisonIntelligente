@@ -64,3 +64,76 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+README - Instructions pour faire fonctionner le projet Laravel "Maison Intelligente"
+
+Cloner le projet depuis GitHub
+----------------------------------
+git clone https://github.com/ton-utilisateur/ton-depot.git
+cd ton-depot
+
+(Remplacer l'URL par l'adresse réelle de votre dépôt.)
+
+Installer les dépendances PHP
+---------------------------------
+Assurez-vous que Composer est installé.
+Puis exécutez :
+composer install
+
+Copier le fichier d'environnement
+-------------------------------------
+cp .env.example .env
+
+Configurer la base de données
+---------------------------------
+Dans le fichier .env :
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=nom_de_votre_bdd
+DB_USERNAME=root
+DB_PASSWORD=
+
+Générer la clé d'application
+-------------------------------
+php artisan key:generate
+
+Migrer la base de données
+----------------------------
+php artisan migrate
+
+(Si nécessaire : php artisan db:seed)
+
+Installer les dépendances front-end (optionnel)
+---------------------------------------------------
+npm install
+npm run dev
+
+Lancer le serveur de développement
+--------------------------------------
+php artisan serve
+
+Accédez ensuite à : http://127.0.0.1:8000/
+
+Résumé rapide
+-------------
+| Étape               | Commande                         |
+|---------------------|----------------------------------|
+| Cloner              | git clone <repo>                 |
+| Installer dépendances | composer install                |
+| Copier .env         | cp .env.example .env              |
+| Configurer BDD      | Modifier .env                    |
+| Générer clé         | php artisan key:generate          |
+| Migrer              | php artisan migrate               |
+| Lancer serveur      | php artisan serve                 |
+php artisan tinker    Pour manipuler les utilisateurs : ajout, rôle, vérification.
+php artisan make:middleware NomMiddleware    Crée un middleware (ex. : Admin, Approved).
+php artisan route:middleware    Affiche tous les middlewares disponibles.
+php artisan down    Met l’application en mode maintenance.
+php artisan up    Sort du mode maintenance.
+php artisan optimize:clear    Vide les caches (route, config, vue).
+Notes importantes :
+-------------------
+PHP >= 8.0 requis
+Composer et MySQL doivent être installés
+Node.js requis si vous gérez le front-end avec Laravel Mix ou Vite
+Attention à la configuration correcte du fichier .env
