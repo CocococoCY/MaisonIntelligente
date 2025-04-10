@@ -208,7 +208,7 @@
         <img src="https://via.placeholder.com/200" alt="Portail">
         <h3>Portail Automatique</h3>
         <p>Facilité pour gérer l'accès à votre domicile</p>
-        <div class="price">500</div>
+        <div class="price">€500</div>
       </div>
       <!-- Article 9 -->
       <div class="product" data-price="299" data-category="interphone">
