@@ -74,12 +74,8 @@
               </form>
             </li>
           @endauth
-
-          @auth
-              @if(auth()->user()->role === 'user')
-                  <a href="{{ route('objets.recherche') }}" class="button">🔍 Rechercher un objet</a>
-              @endif
-          @endauth
+          
+          
 
           @guest
             <li class="nav-item">
@@ -93,7 +89,12 @@
 
   <div class="container">
     <h1>Bienvenue dans votre maison connectée</h1>
-
+    
+    <div class="gestion-btn">
+      <a href="{{ route('objets.recherche') }}">
+        <button>🔍 Rechercher un objet</button>
+      </a>
+    </div>
     <div class="gestion-btn">
       <a href="{{ route('objets.index') }}">
         <button>Accéder aux Objets</button>
