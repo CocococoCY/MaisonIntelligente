@@ -15,7 +15,6 @@ use App\Http\Controllers\ProfilController;
 use Livewire\Volt\Volt;
 use App\Http\Controllers\Admin\DemandeSuppressionAdminController;
 
-Route::get('/rechercher-objet', [ObjetConnecteController::class, 'rechercheObjet'])->name('objets.recherche');
 
 Route::get('/boutique', function () {
     return view('index', ['depuisMaison' => true]);
@@ -70,11 +69,13 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
 });
 
 // Objets connectés
+Route::get('/rechercher-objet', [ObjetConnecteController::class, 'rechercheObjet'])->name('objets.recherche');
 Route::resource('objets', ObjetConnecteController::class);
 Route::post('/objets/{id}/toggle', [ObjetConnecteController::class, 'toggleEtat'])->name('objets.toggle');
 Route::patch('/objets/{objet}/toggle-etat', [ObjetConnecteController::class, 'toggleEtat'])->name('objets.toggleEtat');
 Route::get('/objets/{objet}/edit', [ObjetConnecteController::class, 'edit'])->name('objets.edit');
 Route::put('/objets/{objet}', [ObjetConnecteController::class, 'update'])->name('objets.update');
+Route::get('/objets/{objet}', [ObjetConnecteController::class, 'show'])->name('objets.show');
 
 // Demande de suppression
 

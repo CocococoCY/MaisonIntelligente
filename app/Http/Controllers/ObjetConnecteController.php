@@ -7,6 +7,7 @@ use App\Models\ObjetConnecte;
 use App\Models\TypeObjet;
 use App\Models\Zone;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class ObjetConnecteController extends Controller
 {
@@ -120,6 +121,21 @@ class ObjetConnecteController extends Controller
         $zones = Zone::all();
         return view('objets.edit', compact('objet', 'types', 'zones'));
     }
+
+    public function show($id)
+    {
+        $objet = ObjetConnecte::with('typeObjet', 'zone')->findOrFail($id);
+
+        // Ajouter 0.5 point à l'utilisateur
+        if (Auth::check()) {
+            $user = Auth::user();
+            $user->points += 0.5;
+            $user->save();
+        }
+
+        return view('objets.show', compact('objet'));
+    }
+
 
     public function update(Request $request, $id)
     {

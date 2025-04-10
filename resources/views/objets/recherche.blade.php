@@ -1,5 +1,6 @@
 @extends('layouts.app')
 
+
 @section('content')
 <div class="container">
     <h2>Recherche d'un objet connecté</h2>
@@ -13,9 +14,7 @@
         <div style="margin-top: 20px;">
             <h4>Résultat :</h4>
             <p><strong>Nom :</strong> {{ $objet->nom }}</p>
-            <p><strong>Type :</strong> {{ $objet->typeObjet->nom ?? '-' }}</p>
-            <p><strong>Zone :</strong> {{ $objet->zone->nom ?? '-' }}</p>
-            <p><strong>État :</strong> {{ $objet->etat }}</p>
+            <a href="{{ route('objets.show', $objet->id) }}" class="btn btn-primary">Voir l’objet</a>
         </div>
     @elseif(isset($query))
         <p>Aucun objet trouvé avec ce nom.</p>
