@@ -2,6 +2,7 @@
 
 
 @section('content')
+
 <div class="container">
     <h2>Recherche d'un objet connecté</h2>
 

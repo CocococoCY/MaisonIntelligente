@@ -19,4 +19,10 @@ class UserController extends Controller
         $user = User::findOrFail($id);
         return view('users.show', compact('user'));
     }
+    public function niveau()
+    {
+        $user = \App\Models\User::find(Auth::id()); // ⚠️ rechargement depuis la BDD
+        return view('users.niveau', compact('user'));
+    }
+
 }

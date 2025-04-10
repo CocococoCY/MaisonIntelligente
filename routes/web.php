@@ -24,6 +24,11 @@ Route::get('/menu', function () {
     return view('menu');
 })->name('maison.menu');
 
+Route::middleware(['auth'])->group(function () {
+    Route::get('/mon-niveau', [\App\Http\Controllers\DemandeNiveauController::class, 'index'])->name('niveau.index');
+    Route::post('/demander-niveau', [\App\Http\Controllers\DemandeNiveauController::class, 'demander'])->name('niveau.demander');
+});
+
 // Accueil
 Route::get('/', function () {
     return view('index');
@@ -48,7 +53,7 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
 
 Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/', function () {
-        if (auth()->check() && auth()->user()->email === 'arbriz.coco@gmail.com') {
+        if (auth()->check() && auth()->user()->email === 'corent1.lebris@gmail.com') {
             $users = App\Models\User::all();
             $logs = \App\Models\UserLog::latest()->take(50)->get();
             $categories = \App\Models\Category::all();
@@ -75,7 +80,8 @@ Route::post('/objets/{id}/toggle', [ObjetConnecteController::class, 'toggleEtat'
 Route::patch('/objets/{objet}/toggle-etat', [ObjetConnecteController::class, 'toggleEtat'])->name('objets.toggleEtat');
 Route::get('/objets/{objet}/edit', [ObjetConnecteController::class, 'edit'])->name('objets.edit');
 Route::put('/objets/{objet}', [ObjetConnecteController::class, 'update'])->name('objets.update');
-Route::get('/objets/{objet}', [ObjetConnecteController::class, 'show'])->name('objets.show');
+Route::get('/objets/{id}', [ObjetConnecteController::class, 'show'])->name('objets.show');
+
 
 // Demande de suppression
 

@@ -44,7 +44,7 @@
   </style>
 </head>
 <body>
-
+    
   {{-- NAVBAR --}}
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
     <div class="container-fluid">
@@ -61,8 +61,11 @@
             <li class="nav-item">
               <a class="nav-link" href="{{ route('profil.edit') }}">👤 Modifier mon profil</a>
             </li>
-            
-            @if(Auth::user()->email === 'arbriz.coco@gmail.com')
+            <li>
+              <a class="nav-link" href="{{ route('niveau.index') }}">📊 Mon niveau & points</a>
+            </li>
+
+            @if(Auth::user()->email === 'corent1.lebris@gmail.com')
               <li class="nav-item">
                 <a class="nav-link" href="{{ route('admin.dashboard') }}">🔒 Espace Admin</a>
               </li>

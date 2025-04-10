@@ -64,7 +64,7 @@ Le projet est configuré pour fonctionner avec un compte Gmail de test :
 
 ---
 
-⚠️Quand on veut visualiser la partie Admin, il faut créer un compte avec l'adresse mail arbriz.coco@gmail.com qui est la seule accédant à ce module du projet.⚠️
+⚠️Quand on veut visualiser la partie Admin, il faut créer un compte avec l'adresse mail corent1.lebris@gmail.com qui est la seule accédant à ce module du projet.⚠️
 
 ---
 

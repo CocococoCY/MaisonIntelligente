@@ -20,10 +20,18 @@ class ObjetConnecteController extends Controller
             $objet = ObjetConnecte::where('nom', 'like', "%$query%")
                 ->with('typeObjet', 'zone')
                 ->first();
+
+            // Ajoute les points ici
+            if ($objet && Auth::check()) {
+                $user = Auth::user();
+                $user->points += 2;
+                $user->save();
+            }
         }
 
         return view('objets.recherche', compact('objet', 'query'));
     }
+
 
     public function toggleEtat($id)
     {
@@ -124,17 +132,19 @@ class ObjetConnecteController extends Controller
 
     public function show($id)
     {
-        $objet = ObjetConnecte::with('typeObjet', 'zone')->findOrFail($id);
+        $objet = ObjetConnecte::findOrFail($id);
 
-        // Ajouter 0.5 point à l'utilisateur
         if (Auth::check()) {
             $user = Auth::user();
-            $user->points += 0.5;
-            $user->save();
+            $user->increment('points', 0.5); // ✅ méthode Eloquent qui force l'incrément en base
         }
 
         return view('objets.show', compact('objet'));
     }
+
+
+
+
 
 
     public function update(Request $request, $id)
