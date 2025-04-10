@@ -4,11 +4,14 @@ Ce projet est une application Laravel complète pour gérer une maison connecté
 
 ## 🚀 Installation rapide
 
-### 1. Cloner le projet
+### 1. Cloner le projet ou télécharger en fichier ZIP
 
 ```bash
+1-Clonage:
 git clone https://github.com/CocococoCY/maisonconnectee.git
 cd maisonconnectee
+2-ZIP:
+code->Download ZIP
 ```
 
 ### 2. Installer les dépendances
