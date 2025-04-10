@@ -139,16 +139,14 @@
     </div>
     <div class="header-right">
       
-      @if(isset($depuisMaison) && $depuisMaison && Auth::check())
-        
-        <a href="{{ route('objets.index') }}" class="button">🏠 Mes Objets Connectés</a>
-         
+    @auth
+          @if(isset($depuisMaison) && $depuisMaison)
+              <a href="{{ route('objets.index') }}" class="button">🏠 Ma maison connectée</a>
+          @endif
       @else
-        @guest
           <a href="{{ route('inscription') }}" class="button">S'inscrire</a>
           <a href="{{ route('connexion') }}" class="button">Se connecter</a>
-        @endguest
-      @endif
+      @endauth
 
     </div>
   </header>
