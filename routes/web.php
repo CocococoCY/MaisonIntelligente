@@ -15,6 +15,8 @@ use App\Http\Controllers\ProfilController;
 use Livewire\Volt\Volt;
 use App\Http\Controllers\Admin\DemandeSuppressionAdminController;
 
+Route::get('/rechercher-objet', [ObjetConnecteController::class, 'rechercheObjet'])->name('objets.recherche');
+
 Route::get('/boutique', function () {
     return view('index', ['depuisMaison' => true]);
 })->name('boutique.connexion');

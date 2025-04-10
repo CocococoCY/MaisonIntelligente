@@ -10,6 +10,19 @@ use Illuminate\Support\Facades\Auth;
 
 class ObjetConnecteController extends Controller
 {
+    public function rechercheObjet(Request $request)
+    {
+        $objet = null;
+        $query = $request->input('q');
+
+        if ($query) {
+            $objet = ObjetConnecte::where('nom', 'like', "%$query%")
+                ->with('typeObjet', 'zone')
+                ->first();
+        }
+
+        return view('objets.recherche', compact('objet', 'query'));
+    }
 
     public function toggleEtat($id)
     {

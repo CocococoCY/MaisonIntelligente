@@ -74,6 +74,13 @@
               </form>
             </li>
           @endauth
+
+          @auth
+              @if(auth()->user()->role === 'user')
+                  <a href="{{ route('objets.recherche') }}" class="button">🔍 Rechercher un objet</a>
+              @endif
+          @endauth
+
           @guest
             <li class="nav-item">
               <a class="nav-link" href="{{ route('connexion') }}">Se connecter</a>
