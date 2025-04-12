@@ -36,14 +36,22 @@
                             <td>{{ $objet->zone?->nom ?? 'Non attribuée' }}</td>
                             <td>
                                 <a href="{{ route('objets.edit', $objet->id) }}" class="btn btn-warning btn-sm">✏️</a>
-                                @if(session('objet_supprime') == $objet->id)
-                                    <span class="btn btn-outline-light btn-sm disabled" style="border: 1px solid white;">📨 Demande envoyée</span>
-                                @else
+                                @php
+                                    $demandeExistante = \App\Models\DemandeSuppression::where('objet_connecte_id', $objet->id)
+                                                            ->where('user_id', auth()->id())
+                                                            ->exists();
+                                @endphp
+
+                                @if (!$demandeExistante)
                                     <form action="{{ route('demande.suppression', $objet->id) }}" method="POST" style="display:inline;">
                                         @csrf
                                         <button type="submit" class="btn btn-danger btn-sm">🗑</button>
                                     </form>
+                                @else
+                                    <span class="btn btn-outline-light btn-sm disabled" style="border: 1px solid white;">📨 Demande envoyée</span>
+
                                 @endif
+
                             </td>
                         </tr>
                     @endforeach
