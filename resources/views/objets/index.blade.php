@@ -3,7 +3,7 @@
 @section('content')
     <div class="text-center mb-4">
         <h1 class="display-5 fw-bold text-white">
-            <img src="{{ asset('icons/satellite.png') }}" alt="Icône" width="40" class="me-2">
+          
             Objets Connectés
         </h1>
     </div>
