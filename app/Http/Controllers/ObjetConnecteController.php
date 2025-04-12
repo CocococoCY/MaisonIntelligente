@@ -138,7 +138,7 @@ class ObjetConnecteController extends Controller
         \App\Models\ObjetConnecte::create($validated);
         // Plage horaire enregistrée si présente
 
-        return redirect()->route('objets.index')->with('success', 'Objet ajouté avec succès.');
+        return redirect()->route('objets.index')->with('success');
     }
 
     public function edit($id)

@@ -1,149 +1,105 @@
 @php
     $settings = \App\Models\Setting::first();
-    $color = $settings->couleur_principale ?? '#0d6efd'; // fallback à bleu
+    $color = $settings->couleur_principale ?? '#0d6efd'; 
     $nomPlateforme = $settings->nom_plateforme ?? 'Maison Connectée';
-    $logo = $settings->logo ?? null;
 @endphp
-
 
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>@yield('title', 'Tableau de bord')</title>
-    
-    <!-- Bootstrap -->
+    <title>@yield('title', $nomPlateforme)</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap & Icons -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    
-    <!-- CSS directement intégré -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+
     <style>
-        /* Styles personnalisés directement dans la vue */
-        
         body {
-            background-color: #e0e0e0 !important;
-            color: #333 !important;
-            font-family: Arial, sans-serif !important;
-            padding-top: 20px !important;
+            background: url("/storage/smart-home.jpg") no-repeat center center fixed;
+            background-size: cover;
+            backdrop-filter: blur(5px);
+            color: #f8f9fa;
+            min-height: 100vh;
         }
 
         .navbar {
-            background-color: #007bff !important;
+            background-color: rgba(0, 0, 0, 0.85);
         }
-        
-        .navbar-custom {
+
+        .navbar-brand {
+            font-weight: bold;
+            color: {{ $color }};
+        }
+
+        .dropdown-menu {
+            background-color: #1f1f1f;
+        }
+
+        .dropdown-item {
+            color: white;
+        }
+
+        .dropdown-item:hover {
             background-color: {{ $color }};
         }
 
-
-
-        .navbar-brand {
-            font-weight: bold !important;
-            color: white !important;
-        }
-
-        .nav-link {
-            color: white !important;
-        }
-
-        .nav-link:hover {
-            background-color: rgba(255,255,255,0.2) !important;
+        .btn-logout {
+            border: none;
+            background-color: #dc3545;
+            color: white;
+            border-radius: 4px;
+            padding: 6px 10px;
         }
 
         .container {
-            max-width: 1200px !important;
-            margin: auto !important;
-            padding: 20px !important;
-        }
-
-        h1, h2, h3 {
-            color: #333 !important;
-        }
-
-        button, .btn {
-            background-color: #007bff !important;
-            color: white !important;
-            border-radius: 4px !important;
-            padding: 10px 15px !important;
-            border: none !important;
-        }
-
-        button:hover, .btn:hover {
-            background-color: #0056b3 !important;
-        }
-
-        table {
-            width: 100% !important;
-            border-collapse: collapse !important;
-        }
-
-        table th, table td {
-            padding: 10px !important;
-            text-align: left !important;
-            border-bottom: 1px solid #ddd !important;
-        }
-
-        table th {
-            background-color: #f8f9fa !important;
-        }
-
-        table tr:hover {
-            background-color: #f1f1f1 !important;
-        }
-
-        .card {
-            background-color: #fff !important;
-            border-radius: 8px !important;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1) !important;
-            margin-bottom: 20px !important;
-        }
-
-        .card-header {
-            background-color: #28a745 !important;
-            color: white !important;
-            padding: 10px !important;
-            font-weight: bold !important;
-        }
-
-        .card-body {
-            padding: 15px !important;
+            margin-top: 2rem;
         }
     </style>
-
 </head>
+<body>
 
-<body class="page-body">
-    <nav class="navbar navbar-expand-lg navbar-dark">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">Maison Connectée</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-                <ul class="navbar-nav">
-                    @auth
-                        
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('menu') }}">🏠 Menu</a>
-                        </li>
-                        
-                    @endauth
-                    @guest
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('connexion') }}">Se connecter</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('inscription') }}">S'inscrire</a>
-                        </li>
-                    @endguest
-                </ul>
-            </div>
+<nav class="navbar navbar-expand-lg navbar-dark shadow">
+    <div class="container-fluid">
+        <a class="navbar-brand text-white" href="{{ route('menu') }}">{{ $nomPlateforme }}</a>
+
+        <!-- Menu burger -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse justify-content-end" id="mainNavbar">
+            <ul class="navbar-nav text-end">
+                @if(auth()->check() && (auth()->user()->type === 'expert' ||auth()->user()->type === 'avancé'|| auth()->user()->email === 'corent1.lebris@gmail.com'))
+                    <li class="nav-item"><a class="nav-link" href="{{ route('objets.index') }}">Objets</a></li>
+                @endif
+                <li class="nav-item"><a class="nav-link" href="{{ route('objets.recherche') }}"> Rechercher</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ route('profil.edit') }}"> Mon profil</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ route('users.index') }}"> Membres</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ route('niveau.index') }}"> Mon niveau</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ route('boutique.connexion') }}"> Boutique</a></li>
+                @if(auth()->check() && (auth()->user()->type === 'expert' || auth()->user()->email === 'corent1.lebris@gmail.com'))
+                    <li class="nav-item"><a class="nav-link" href="{{ route('admin.dashboard') }}"> Admin</a></li>
+                @endif
+                <li class="nav-item">
+                    <form method="POST" action="{{ route('logout') }}" class="d-inline">
+                        @csrf
+                        <button type="submit" class="nav-link btn btn-link text-white" style="text-decoration: none;">
+                             Déconnexion
+                        </button>
+                    </form>
+                </li>
+
+            </ul>
         </div>
-    </nav>
-
-    <div class="container">
-        @yield('content')
     </div>
+</nav>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<div class="container">
+    @yield('content')
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
