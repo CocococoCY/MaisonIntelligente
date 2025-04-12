@@ -15,21 +15,40 @@ class ObjetConnecteController extends Controller
     {
         $objet = null;
         $query = $request->input('q');
+        $etat = $request->input('etat');
+        $type = $request->input('type');
+        $zone = $request->input('zone');
 
-        if ($query) {
-            $objet = ObjetConnecte::where('nom', 'like', "%$query%")
-                ->with('typeObjet', 'zone')
-                ->first();
+        if ($query || $etat || $type || $zone) {
+            $builder = ObjetConnecte::with('typeObjet', 'zone');
 
-            // Ajoute les points ici
+            if ($query) {
+                $builder->where('nom', 'like', "%$query%");
+            }
+
+            if ($etat) {
+                $builder->where('etat', $etat);
+            }
+
+            if ($type) {
+                $builder->where('type', $type);
+            }
+
+            if ($zone) {
+                $builder->where('zone_id', $zone);
+            }
+
+            $objet = $builder->first();
+
             if ($objet && Auth::check()) {
-                $user = Auth::user();
                 Auth::user()->ajouterPoints(1);
-
             }
         }
 
-        return view('objets.recherche', compact('objet', 'query'));
+        $types = \App\Models\TypeObjet::all();
+        $zones = \App\Models\Zone::all();
+
+        return view('objets.recherche', compact('objet', 'query', 'etat', 'type', 'zone', 'types', 'zones'));
     }
 
 

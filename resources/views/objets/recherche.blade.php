@@ -7,6 +7,30 @@
     <h2>Recherche d'un objet connecté</h2>
 
     <form action="{{ route('objets.recherche') }}" method="GET">
+    <select name="etat" class="form-select">
+    <option value="">Tous les états</option>
+    <option value="actif" {{ request('etat') == 'actif' ? 'selected' : '' }}>Actif</option>
+    <option value="inactif" {{ request('etat') == 'inactif' ? 'selected' : '' }}>Inactif</option>
+    </select>
+
+    <select name="type" class="form-select">
+    <option value="">Tous les types</option>
+    @foreach($types as $type)
+        <option value="{{ $type->nom }}" {{ request('type') == $type->nom ? 'selected' : '' }}>
+        {{ ucfirst($type->nom) }}
+        </option>
+    @endforeach
+    </select>
+
+    <select name="zone" class="form-select">
+    <option value="">Toutes les zones</option>
+    @foreach($zones as $zone)
+        <option value="{{ $zone->id }}" {{ request('zone') == $zone->id ? 'selected' : '' }}>
+        {{ $zone->nom }}
+        </option>
+    @endforeach
+    </select>
+
         <input type="text" name="q" placeholder="Nom de l'objet" value="{{ old('q', $query ?? '') }}">
         <button type="submit">Rechercher</button>
     </form>

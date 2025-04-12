@@ -30,6 +30,9 @@ class AuthController extends Controller
             'email' => 'required|email|unique:users,email',
             'password' => 'required|min:6',
             'photo' => 'nullable|image|max:2048',
+            'genre' => 'nullable|string',
+            'ville' => 'nullable|string',
+            'date_naissance' => 'nullable|date',
         ]);
 
         $photoPath = null;
@@ -45,12 +48,16 @@ class AuthController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'photo' => $photoPath,
+            'genre' => $request->genre,
+            'ville' => $request->ville,
+            'date_naissance' => $request->date_naissance,
         ]);
 
         Mail::to($request->email)->send(new VerificationCodeMail($code));
 
         return redirect()->route('code.form')->with('success', 'Un code vous a été envoyé par mail.');
     }
+
 
     public function showCodeForm()
     {
@@ -66,12 +73,20 @@ class AuthController extends Controller
         if (Session::get('verification_code') == $request->code) {
             $data = Session::get('user_registration');
 
+            
+
             User::create([
                 'name' => $data['name'],
                 'email' => $data['email'],
                 'password' => $data['password'],
                 'photo' => $data['photo'],
+                'genre' => $data['genre'] ?? null,
+                'ville' => $data['ville'] ?? null,
+                'date_naissance' => $data['date_naissance'] ?? null,
+                'type' => 'Débutant',
+                'points' => 0,
             ]);
+            
 
             Session::forget(['verification_code', 'user_registration']);
 

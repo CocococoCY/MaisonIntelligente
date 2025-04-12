@@ -17,30 +17,21 @@ class SettingController extends Controller
     public function update(Request $request)
     {
         $request->validate([
-            'platform_name' => 'required|string|max:255',
-            'theme_color' => 'nullable|string|max:7',
+            'platform_name' => 'nullable|string',
+            'primary_color' => 'nullable|string',
             'welcome_message' => 'nullable|string',
             'logo' => 'nullable|image|max:2048',
         ]);
 
-        $settings = Setting::firstOrCreate([], []); // Crée si aucun paramètre n'existe
-
-        $settings->platform_name = $request->platform_name;
-        $settings->theme_color = $request->theme_color;
-        $settings->welcome_message = $request->welcome_message;
+        Setting::updateOrCreate(['key' => 'platform_name'], ['value' => $request->platform_name]);
+        Setting::updateOrCreate(['key' => 'primary_color'], ['value' => $request->primary_color]);
+        Setting::updateOrCreate(['key' => 'welcome_message'], ['value' => $request->welcome_message]);
 
         if ($request->hasFile('logo')) {
-            // Supprime l'ancien logo si présent
-            if ($settings->logo_path && Storage::disk('public')->exists($settings->logo_path)) {
-                Storage::disk('public')->delete($settings->logo_path);
-            }
-
             $path = $request->file('logo')->store('logos', 'public');
-            $settings->logo_path = $path;
+            Setting::updateOrCreate(['key' => 'logo'], ['value' => $path]);
         }
 
-        $settings->save();
-
-        return redirect()->route('admin.settings.edit')->with('success', 'Paramètres mis à jour avec succès.');
+        return back()->with('success', 'Paramètres mis à jour avec succès.');
     }
 }

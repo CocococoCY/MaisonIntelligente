@@ -10,7 +10,8 @@ class UserController extends Controller
     public function index()
     {
         // Liste tous les utilisateurs sauf l'utilisateur connecté
-        $users = User::where('id', '!=', auth()->id())->get();
+        $users = User::all(); // Inclut tous les utilisateurs, y compris celui connecté
+        
         return view('users.index', compact('users'));
     }
 

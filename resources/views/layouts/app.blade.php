@@ -1,3 +1,11 @@
+@php
+    $settings = \App\Models\Setting::first();
+    $color = $settings->couleur_principale ?? '#0d6efd'; // fallback à bleu
+    $nomPlateforme = $settings->nom_plateforme ?? 'Maison Connectée';
+    $logo = $settings->logo ?? null;
+@endphp
+
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -21,6 +29,12 @@
         .navbar {
             background-color: #007bff !important;
         }
+        
+        .navbar-custom {
+            background-color: {{ $color }};
+        }
+
+
 
         .navbar-brand {
             font-weight: bold !important;

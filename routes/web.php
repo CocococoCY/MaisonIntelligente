@@ -57,7 +57,7 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
 
 Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/', function () {
-        if (auth()->check() && auth()->user()->email === 'corent1.lebris@gmail.com') {
+        if (auth()->check() && Auth::user()->niveau === 'Expert' || Auth::user()->email === 'corent1.lebris@gmail.com') {
             $users = App\Models\User::all();
             $logs = \App\Models\UserLog::latest()->take(50)->get();
             $categories = \App\Models\Category::all();
