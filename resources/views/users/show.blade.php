@@ -16,7 +16,7 @@
             <h3 class="card-title">{{ $user->name }}</h3>
 
             {{-- Type de membre --}}
-            <p class="text-muted"><i class="bi bi-person-badge"></i> {{ $user->type ?? 'Non défini' }}</p>
+            <p class="text-muted"><i class="bi bi-person-badge"></i> {{ $user->niveau ?? 'Non défini' }}</p>
 
             {{-- Genre --}}
             <p><i class="bi bi-gender-ambiguous"></i> {{ $user->genre ?? 'Non renseigné' }}</p>

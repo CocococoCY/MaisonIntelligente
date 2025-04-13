@@ -41,10 +41,13 @@
 <div class="members-container">
     <h2>👥 Liste des membres</h2>
 
-    @foreach($users as $user)
-        <div class="member-item">
-            <a href="#">{{ $user->name }} ({{ $user->type ?? 'type inconnu' }})</a>
+        @foreach ($users as $user)
+        <div>
+            <a href="{{ route('users.show', $user->id) }}">
+                {{ $user->name }} ({{ $user->niveau ?? 'type inconnu' }})
+            </a>
         </div>
-    @endforeach
+        @endforeach
+
 </div>
 @endsection

@@ -21,6 +21,7 @@ class AdminController extends Controller
 
         $user->niveau = $demande->niveau_demande;
         $user->save();
+        
         $demande->delete();
 
         return redirect()->back()->with('success', 'Niveau accepté pour ' . $user->email);

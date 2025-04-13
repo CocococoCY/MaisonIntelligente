@@ -16,6 +16,9 @@ use Livewire\Volt\Volt;
 use App\Http\Controllers\Admin\DemandeSuppressionAdminController;
 use App\Http\Controllers\AdminController;
 
+Route::put('/profil/edit', [ProfilController::class, 'update'])->name('profil.update');
+
+
 Route::get('/admin/niveaux', [AdminController::class, 'voirDemandes'])->name('admin.niveaux');
 Route::post('/admin/niveaux/{id}/accepter', [AdminController::class, 'accepterDemande'])->name('admin.niveau.accepter');
 Route::post('/admin/niveaux/{id}/refuser', [AdminController::class, 'refuserDemande'])->name('admin.niveau.refuser');

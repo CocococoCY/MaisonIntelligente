@@ -1,7 +1,9 @@
 @php
+    $user = auth()->user();
     $settings = \App\Models\Setting::first();
-    $color = $settings->couleur_principale ?? '#0d6efd'; 
+    $color = $settings->couleur_principale ?? '#0d6efd';
     $nomPlateforme = $settings->nom_plateforme ?? 'Maison Connectée';
+    $logo = $settings->logo ?? null;
 @endphp
 
 <!DOCTYPE html>
@@ -9,107 +11,74 @@
 <head>
     <meta charset="UTF-8">
     <title>@yield('title', $nomPlateforme)</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <!-- Bootstrap & Icons -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
-
     <style>
         body {
-            background: url('/images/smart-home.jpg') no-repeat center center fixed;
+            background: url('/fond/smart-home.jpg') no-repeat center center fixed;
             background-size: cover;
-            backdrop-filter: blur(3px);
-            color: white;
+            color: #fff;
         }
-
-        /* Pour éviter que le contenu soit illisible */
-        .content-container, .form-container, .card, .table {
-            background-color: rgba(0, 0, 0, 0.6);
-            padding: 20px;
-            border-radius: 10px;
+        .navbar {
+            background-color: black !important;
         }
-
-        h1, h2, h3, label, p, .nav-link {
+        .navbar-brand, .nav-link {
             color: white !important;
         }
-
-        .navbar {
-            background-color: rgba(0, 0, 0, 0.85);
+        .nav-link:hover {
+            background-color: rgba(255,255,255,0.2);
         }
-
-        .navbar-brand {
-            font-weight: bold;
-            color: {{ $color }};
-        }
-
-        .dropdown-menu {
-            background-color: #1f1f1f;
-        }
-
-        .dropdown-item {
+        
+        body {
+            background: url("{{ asset('images/smart-home.jpg') }}") no-repeat center center fixed;
+            background-size: cover;
             color: white;
         }
+    </style>
 
-        .dropdown-item:hover {
-            background-color: {{ $color }};
-        }
-
-        .btn-logout {
-            border: none;
-            background-color: #dc3545;
-            color: white;
-            border-radius: 4px;
-            padding: 6px 10px;
-        }
-
-        .container {
-            margin-top: 2rem;
-        }
     </style>
 </head>
 <body>
+<nav class="navbar navbar-expand-lg navbar-dark px-3">
+    <a class="navbar-brand text-white" href="{{ route('menu') }}">Maison Connectée</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
 
-<nav class="navbar navbar-expand-lg navbar-dark shadow">
-    <div class="container-fluid">
-        <a class="navbar-brand text-white" href="{{ route('menu') }}">{{ $nomPlateforme }}</a>
-
-        <!-- Menu burger -->
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse justify-content-end" id="mainNavbar">
-            <ul class="navbar-nav text-end">
-                @if(auth()->check() && (auth()->user()->type === 'expert' ||auth()->user()->type === 'avancé'|| auth()->user()->email === 'corent1.lebris@gmail.com'))
-                    <li class="nav-item"><a class="nav-link" href="{{ route('objets.index') }}">Objets</a></li>
-                @endif
-                <li class="nav-item"><a class="nav-link" href="{{ route('objets.recherche') }}"> Rechercher</a></li>
-                <li class="nav-item"><a class="nav-link" href="{{ route('profil.edit') }}"> Mon profil</a></li>
-                <li class="nav-item"><a class="nav-link" href="{{ route('users.index') }}"> Membres</a></li>
+            @auth
+                
+                <li class="nav-item"><a class="nav-link" href="{{ route('objets.recherche') }}"> Recherche</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ route('niveau.index') }}"> Mon niveau</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ route('users.index') }}"> Membres</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ route('profil.edit') }}"> Mon profil</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ route('boutique.connexion') }}"> Boutique</a></li>
-                @if(auth()->check() && (auth()->user()->type === 'expert' || auth()->user()->email === 'corent1.lebris@gmail.com'))
+
+                @if($user->niveau === 'Avancé' || $user->niveau === 'Expert')
+                    <li class="nav-item"><a class="nav-link" href="{{ route('objets.index') }}"> Objets</a></li>
+                @endif
+
+                @if($user->niveau === 'Expert')
                     <li class="nav-item"><a class="nav-link" href="{{ route('admin.dashboard') }}"> Admin</a></li>
                 @endif
+
                 <li class="nav-item">
-                    <form method="POST" action="{{ route('logout') }}" class="d-inline">
+                    <form method="POST" action="{{ route('logout') }}">
                         @csrf
-                        <button type="submit" class="nav-link btn btn-link text-white" style="text-decoration: none;">
-                             Déconnexion
-                        </button>
+                        <button class="nav-link btn btn-link text-white" type="submit"> Déconnexion</button>
                     </form>
                 </li>
-
-            </ul>
-        </div>
+            @else
+                <li class="nav-item"><a class="nav-link" href="{{ route('connexion') }}">Se connecter</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ route('inscription') }}">S'inscrire</a></li>
+            @endauth
+        </ul>
     </div>
 </nav>
 
-<div class="container">
+<div class="container mt-4">
     @yield('content')
 </div>
-
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
