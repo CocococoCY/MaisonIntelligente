@@ -5,13 +5,27 @@
     <title>@yield('title', 'Gestion des Objets')</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
+        
         body {
-            background: url("{{ asset('storage/smart-home.jpg') }}") no-repeat center center fixed;
+            background: url('/images/smart-home.jpg') no-repeat center center fixed;
             background-size: cover;
+            backdrop-filter: blur(3px);
             color: white;
-            font-family: 'Segoe UI', sans-serif;
         }
 
+        /* Pour éviter que le contenu soit illisible */
+        .content-container, .form-container, .card, .table {
+            background-color: rgba(0, 0, 0, 0.6);
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        h1, h2, h3, label, p, .nav-link {
+            color: white !important;
+        }
+
+
+       
         .navbar {
             background-color: #1a1a1a;
         }

@@ -17,11 +17,21 @@
 
     <style>
         body {
-            background: url("/storage/smart-home.jpg") no-repeat center center fixed;
+            background: url('/images/smart-home.jpg') no-repeat center center fixed;
             background-size: cover;
-            backdrop-filter: blur(5px);
-            color: #f8f9fa;
-            min-height: 100vh;
+            backdrop-filter: blur(3px);
+            color: white;
+        }
+
+        /* Pour éviter que le contenu soit illisible */
+        .content-container, .form-container, .card, .table {
+            background-color: rgba(0, 0, 0, 0.6);
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        h1, h2, h3, label, p, .nav-link {
+            color: white !important;
         }
 
         .navbar {
