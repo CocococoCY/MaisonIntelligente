@@ -64,9 +64,14 @@ Le projet est configuré pour fonctionner avec un compte Gmail de test :
 
 ---
 
-⚠️Quand on veut visualiser la partie Admin, il faut créer un compte avec l'adresse mail corent1.lebris@gmail.com qui est la seule accédant à ce module du projet.⚠️
+⚠️Quand on veut visualiser la partie Admin directement, il faut créer un compte avec l'adresse mail corent1.lebris@gmail.com qui est la seule accédant à ce module du projet de base, avant promotions des autres comptes par points.⚠️
 
 ---
+
+Mise en place de la maintenance:
+
+php artisan down    Met l’application en mode maintenance.
+php artisan up    Sort du mode maintenance.
 
 ## 📁 Arborescence principale
 
@@ -90,10 +95,10 @@ Le projet est configuré pour fonctionner avec un compte Gmail de test :
 
 ## 👨‍💻 Contributeurs
 
-- Étudiants CyTech – Projet encadré
+- Étudiants CyTech – Projet encadré 
 - Framework utilisé : Laravel 10
 - Frontend : Blade + Vite
 
 ---
 
-🧠 **Tu peux maintenant cloner ce dépôt et tout fonctionne directement !**
+
